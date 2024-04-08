@@ -1,0 +1,32 @@
+call plug#begin()
+
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'https://github.com/ap/vim-css-color'
+Plug 'https://github.com/preservim/nerdtree'
+Plug 'https://github.com/tc50cal/vim-terminal'
+Plug 'christoomey/vim-tmux-navigator'
+
+call plug#end()
+
+let g:airline_theme='ayu_mirage'
+
+" For kitty terminal
+let &t_ut=''
+
+" Disable bell sound
+set belloff=all
+
+set autoindent
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
+set smarttab
+set number relativenumber
+syntax on
+filetype indent on
+filetype on
+
+nnoremap <C-f> : NERDTreeFocus<CR>
+nnoremap <C-n> : NERDTree<CR>
+nnoremap <C-t> : NERDTreeToggle<CR>
