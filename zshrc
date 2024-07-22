@@ -101,6 +101,9 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+export LC_ALL=en_IN.UTF-8
+export LANG=en_IN.UTF-8
+
 export PATH="/home/yenruo/.local/bin:$PATH"
 export PATH="/home/yenruo/.local/zig:$PATH"
 
@@ -118,3 +121,7 @@ unsetopt BEEP
 alias listserv="systemctl list-unit-files --type=service"
 alias hst="history 1 -1 | cut -c 8- | sort | uniq | fzf | tr -d '\n' | xclip -sel c"
 alias nv="nvim"
+alias gt="cat ~ | wl-copy"
+
+export LC_ALL=en_IN.UTF-8
+export LANG=en_IN.UTF-8

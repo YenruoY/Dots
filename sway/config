@@ -15,6 +15,7 @@ set $left h
 set $down j
 set $up k
 set $right l
+
 # Your preferred terminal emulator
 # Recommends: foot
 set $term kitty
@@ -33,7 +34,7 @@ set $menu $rofi_cmd -show combi -combi-modes drun#run -modes combi
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 # Requires: desktop-backgrounds-compat, swaybg
-output * bg wallhaven.png fill
+output * bg /home/yenruo/Pictures/Wallpaper/wallhaven-qzerel.jpg fill
 #
 # Example configuration:
 #
@@ -232,21 +233,57 @@ bindsym $mod+d mode "resize"
 #
 include '$(/usr/libexec/sway/layered-include "/usr/share/sway/config.d/*.conf" "/etc/sway/config.d/*.conf" "${XDG_CONFIG_HOME:-$HOME/.config}/sway/config.d/*.conf")'
 
-# User config
+
+####################################
+## User config
+####################################
+
+# autostart apps
+exec --no-startup-id /usr/lib/gsd-xsettings
+exec --no-startup-id mako
 
 # Setting up gaps
 gaps inner 5
 gaps outer 5
 
-# To handle toouchpad
+# To handle touchpad
 input * {
-    left_handed enabled
+    # left_handed enabled
     tap enabled
     natural_scroll enabled
     dwt enabled
-    accel_profile "flat" # disable mouse acceleration (enabled by default; to set it manually, use "adaptive" instead of "flat")
-    pointer_accel 0.7 # set mouse sensitivity (between -1 and 1)
+    # disable mouse acceleration (enabled by default; to set it manually, use "adaptive" instead of "flat")
+    accel_profile "adaptive"
+    # set mouse sensitivity (between -1 and 1)
+    pointer_accel 0.7
 }
+
+# set up waybar
+bar {
+  swaybar_command waybar
+  workspace_buttons yes
+}
+
+
+# volume keys
+# don't know pactl alternative for pipewire
+# bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume $(pacmd list-sinks |awk '/* index:/{print $3}') +5% # Raise
+# bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume $(pacmd list-sinks |awk '/* index:/{print $3}') -5% # Lower
+# bindsym XF86AudioMute exec pactl set-sink-mute  $(pacmd list-sinks |awk '/* index:/{print $3}') toggle # Mute
+
+
+# multimedia keys
+bindsym XF86AudioPlay  exec "mpc toggle"
+bindsym XF86AudioStop  exec "mpc stop"
+bindsym XF86AudioNext  exec "mpc next"
+bindsym XF86AudioPrev  exec "mpc prev"
+bindsym XF86AudioPause exec "mpc pause"
+
+
+# Sreen brightness controls -- # https://github.com/haikarainen/light
+bindsym XF86MonBrightnessUp exec light -A 5 && notify-send -t 500 "Brightness +5"
+bindsym XF86MonBrightnessDown exec light -U 5 && notify-send -t 500 "Brightness +5"
+
 
 # Remove title bar
 default_border pixel 3
@@ -254,3 +291,6 @@ default_floating_border normal 3
 font pango:monospace 1
 titlebar_border_thickness 0
 titlebar_padding 0
+
+seat seat0 xcursor_theme Quintom_Snow 50
+client.focused #8C8A7D #8C8A7D #8C8A7D #8C8A7D #8C8A7D
